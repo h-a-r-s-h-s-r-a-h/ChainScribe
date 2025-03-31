@@ -12,3 +12,12 @@ pub enum TopicAccountError {
     TopicDescriptionTooLong,
 }
 
+#[error_code]
+pub enum BlogAccountError {
+    #[msg("Blog generator name is too long!")]
+    BlogGeneratorNameTooLong,
+    #[msg("Topic id too long!")]
+    TopicIdTooLong,
+    #[msg("Blog id too long!")]
+    BlogIdTooLong,
+}
