@@ -2,7 +2,7 @@ use crate::{constants::*, state::*};
 use anchor_lang::prelude::*;
 
 #[derive(Accounts)]
-#[instruction(topic_id: String,blog_id: String )]
+#[instruction(topic_id: String, blog_id: String)]
 pub struct CreateBlog<'info> {
     #[account(
         mut,
