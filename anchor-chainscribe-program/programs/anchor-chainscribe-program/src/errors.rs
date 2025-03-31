@@ -10,6 +10,8 @@ pub enum TopicAccountError {
     TopicTitleTooLong,
     #[msg("Topic Description too long!")]
     TopicDescriptionTooLong,
+    #[msg("You have no right to update this topic!")]
+    AdminNotFound,
 }
 
 #[error_code]

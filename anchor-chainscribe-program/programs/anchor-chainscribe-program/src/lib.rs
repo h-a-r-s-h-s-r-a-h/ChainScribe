@@ -41,4 +41,20 @@ pub mod anchor_chainscribe_program {
     ) -> Result<()> {
         instructions::create_blog(ctx, topic_id, blog_id, blog_generator_name, blog)
     }
+
+    pub fn update_topic(
+        ctx: Context<UpdateTopic>,
+        topic_id: String,
+        topic_generator_name: String,
+        topic_title: String,
+        topic_description: String,
+    ) -> Result<()> {
+        instructions::update_topic(
+            ctx,
+            topic_id,
+            topic_generator_name,
+            topic_title,
+            topic_description,
+        )
+    }
 }
