@@ -1,3 +1,3 @@
-pub mod add_title;
+pub mod add_topic;
 
-pub use add_title::*;
+pub use add_topic::*;
