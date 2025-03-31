@@ -8,3 +8,4 @@ pub const MAX_ID_LENGTH: usize = 20;
 pub const U32_SIZE: usize = 4;
 pub const BOOL_SIZE: usize = 1;
 pub const I64_SIZE: usize = 8;
+pub const MAX_BLOG_SIZE: usize = 500;

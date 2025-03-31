@@ -16,7 +16,7 @@ pub struct CreateBlog<'info> {
         seeds=["blog".as_bytes(), topic_id.as_bytes(), blog_id.as_bytes(), blog_generator.key().as_ref()],
         bump,
         payer=blog_generator,
-        space=BlogAccountState::INIT_SPACE + MAX_GENERATOR_NAME + MAX_ID_LENGTH + MAX_ID_LENGTH
+        space=BlogAccountState::INIT_SPACE + MAX_GENERATOR_NAME + MAX_ID_LENGTH + MAX_BLOG_SIZE + MAX_ID_LENGTH
     )]
     pub blog_account: Account<'info, BlogAccountState>,
 
@@ -28,6 +28,7 @@ pub struct CreateBlog<'info> {
 impl Space for BlogAccountState {
     const INIT_SPACE: usize = ANCHOR_DISCRIMINATOR
         + PUBKEY_SIZE
+        + STRING_LENGTH_PREFIX
         + STRING_LENGTH_PREFIX
         + STRING_LENGTH_PREFIX
         + STRING_LENGTH_PREFIX

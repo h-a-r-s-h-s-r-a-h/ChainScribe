@@ -6,6 +6,7 @@ pub fn create_blog(
     topic_id: String,
     blog_id: String,
     blog_generator_name: String,
+    blog: String,
 ) -> Result<()> {
     require!(
         topic_id.len() <= MAX_ID_LENGTH,
@@ -30,6 +31,7 @@ pub fn create_blog(
     blog_account.comments = 0;
     blog_account.likes = 0;
     blog_account.last_updated_at = Clock::get()?.unix_timestamp;
+    blog_account.blog = blog;
 
     let topic = &mut ctx.accounts.topic;
     topic.no_of_blog = topic.no_of_blog.checked_add(1).unwrap();

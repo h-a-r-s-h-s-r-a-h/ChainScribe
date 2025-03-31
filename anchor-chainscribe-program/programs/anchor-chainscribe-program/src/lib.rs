@@ -12,6 +12,8 @@ declare_id!("FnAbLTmMMUA6XvadsrFm8pHtAYYNHEnKo4Q7tcG5vhiL");
 
 #[program]
 pub mod anchor_chainscribe_program {
+    use state::blog;
+
     use super::*;
 
     pub fn create_topic(
@@ -35,7 +37,8 @@ pub mod anchor_chainscribe_program {
         topic_id: String,
         blog_id: String,
         blog_generator_name: String,
+        blog: String,
     ) -> Result<()> {
-        instructions::create_blog(ctx, topic_id, blog_id, blog_generator_name)
+        instructions::create_blog(ctx, topic_id, blog_id, blog_generator_name, blog)
     }
 }

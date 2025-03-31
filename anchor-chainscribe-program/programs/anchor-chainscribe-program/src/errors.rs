@@ -20,4 +20,6 @@ pub enum BlogAccountError {
     TopicIdTooLong,
     #[msg("Blog id too long!")]
     BlogIdTooLong,
+    #[msg("Blog too long!")]
+    BlogTooLong,
 }
