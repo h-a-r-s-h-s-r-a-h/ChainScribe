@@ -21,7 +21,6 @@ describe("anchor-chainscribe-program", () => {
     [
       Buffer.from("topic"),
       Buffer.from(topic.topic_id),
-      provider.wallet.publicKey.toBuffer(),
     ],
     program.programId
   );

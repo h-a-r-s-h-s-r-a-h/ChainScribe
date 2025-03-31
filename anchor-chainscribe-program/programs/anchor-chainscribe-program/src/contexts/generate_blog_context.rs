@@ -5,8 +5,15 @@ use anchor_lang::prelude::*;
 #[instruction(topic_id: String,blog_id: String )]
 pub struct CreateBlog<'info> {
     #[account(
+        mut,
+        seeds=["topic".as_bytes(), topic_id.as_bytes()],
+        bump,
+    )]
+    pub topic: Account<'info, TopicAccountState>,
+
+    #[account(
         init,
-        seeds=["blog".as_bytes(),topic_id.as_bytes(),blog_id.as_bytes(),blog_generator.key().as_ref()],
+        seeds=["blog".as_bytes(), topic_id.as_bytes(), blog_id.as_bytes(), blog_generator.key().as_ref()],
         bump,
         payer=blog_generator,
         space=BlogAccountState::INIT_SPACE + MAX_GENERATOR_NAME + MAX_ID_LENGTH + MAX_ID_LENGTH

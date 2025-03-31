@@ -6,7 +6,7 @@ use anchor_lang::prelude::*;
 pub struct CreateTopic<'info> {
     #[account(
         init,
-        seeds=["topic".as_bytes(), topic_id.as_bytes(), topic_generator.key().as_ref()],
+        seeds=["topic".as_bytes(), topic_id.as_bytes()],
         bump,
         payer=topic_generator,
         space=TopicAccountState::INIT_SPACE + MAX_GENERATOR_NAME + MAX_ID_LENGTH + MAX_TOPIC_TITLE + MAX_TOPIC_DESCRIPTION
