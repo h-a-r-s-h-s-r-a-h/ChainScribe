@@ -7,7 +7,6 @@ mod instructions;
 mod state;
 
 use contexts::*;
-use instructions::*;
 
 declare_id!("FnAbLTmMMUA6XvadsrFm8pHtAYYNHEnKo4Q7tcG5vhiL");
 
@@ -15,11 +14,19 @@ declare_id!("FnAbLTmMMUA6XvadsrFm8pHtAYYNHEnKo4Q7tcG5vhiL");
 pub mod anchor_chainscribe_program {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        msg!("Greetings from: {:?}", ctx.program_id);
-        Ok(())
+    pub fn create_topic(
+        ctx: Context<CreateTopic>,
+        topic_id: String,
+        topic_generator_name: String,
+        topic_title: String,
+        topic_description: String,
+    ) -> Result<()> {
+        instructions::create_topic(
+            ctx,
+            topic_id,
+            topic_generator_name,
+            topic_title,
+            topic_description,
+        )
     }
 }
-
-#[derive(Accounts)]
-pub struct Initialize {}
