@@ -16,6 +16,11 @@ describe("anchor-chainscribe-program", () => {
     topic_title: "BlockChain",
     topic_description: "About Blockchain",
   };
+  const newTopic = {
+    topic_generator_name: "newHarsh",
+    topic_title: "newBlockChain",
+    topic_description: "new About Blockchain",
+  };
 
   const blog = {
     blogId: "01",
@@ -107,6 +112,49 @@ describe("anchor-chainscribe-program", () => {
         afterTimestamp
       );
       expect(topicAccount.lastUpdatedAt.toNumber()).to.be.within(
+        beforeTimestamp - 1,
+        afterTimestamp
+      );
+    } catch (error) {
+      console.error("Error adding election:", error);
+      throw error;
+    }
+  });
+
+  // ctx: Context<UpdateTopic>,
+  // _topic_id: String,
+  // topic_generator_name: String,
+  // topic_title: String,
+  // topic_description: String,
+  it("Update topic!", async () => {
+    try {
+      const beforeTimestamp = Math.floor(Date.now() / 1000);
+      await program.methods
+        .updateTopic(
+          topic.topic_id,
+          newTopic.topic_generator_name,
+          newTopic.topic_title,
+          newTopic.topic_description
+        )
+        .accounts({})
+        .rpc();
+
+      const account = await program.account.topicAccountState.fetch(topicPda);
+      expect(account.topicGeneratorId.toString()).to.equal(
+        provider.wallet.publicKey.toString()
+      );
+      expect(account.topicId).to.equal(topic.topic_id);
+      expect(account.topicGeneratorName).to.equal(newTopic.topic_generator_name);
+      expect(account.topicTitle).to.equal(newTopic.topic_title);
+      expect(account.topicDescription).to.equal(newTopic.topic_description);
+      expect(account.noOfBlog).to.equal(1);
+      expect(account.likes).to.equal(0);
+      expect(account.comments).to.equal(0);
+      expect(account.isActive).to.equal(true);
+      expect(account.isPublic).to.equal(true);
+
+      const afterTimestamp = Math.floor(Date.now() / 1000);
+      expect(account.lastUpdatedAt.toNumber()).to.be.within(
         beforeTimestamp - 1,
         afterTimestamp
       );

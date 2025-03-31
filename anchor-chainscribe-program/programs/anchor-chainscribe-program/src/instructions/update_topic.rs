@@ -3,7 +3,7 @@ use anchor_lang::prelude::*;
 
 pub fn update_topic(
     ctx: Context<UpdateTopic>,
-    topic_id: String,
+    _topic_id: String,
     topic_generator_name: String,
     topic_title: String,
     topic_description: String,
