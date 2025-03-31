@@ -55,7 +55,7 @@ describe("anchor-chainscribe-program", () => {
 
       const afterTimestamp = Math.floor(Date.now() / 1000);
       expect(account.lastUpdatedAt.toNumber()).to.be.within(
-        beforeTimestamp-1,
+        beforeTimestamp - 1,
         afterTimestamp
       );
     } catch (error) {
