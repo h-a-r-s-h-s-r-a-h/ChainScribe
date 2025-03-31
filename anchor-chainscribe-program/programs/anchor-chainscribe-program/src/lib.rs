@@ -29,4 +29,13 @@ pub mod anchor_chainscribe_program {
             topic_description,
         )
     }
+
+    pub fn create_blog(
+        ctx: Context<CreateBlog>,
+        topic_id: String,
+        blog_id: String,
+        blog_generator_name: String,
+    ) -> Result<()> {
+        instructions::create_blog(ctx, topic_id, blog_id, blog_generator_name)
+    }
 }
