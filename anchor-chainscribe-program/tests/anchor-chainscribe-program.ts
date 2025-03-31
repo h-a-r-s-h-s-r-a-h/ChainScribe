@@ -19,7 +19,7 @@ describe("anchor-chainscribe-program", () => {
 
   const blog = {
     blogId: "01",
-    blog: "Block is interesting!",
+    blog: "BlockChain is interesting!",
     generatorName: "Dev",
   };
 
