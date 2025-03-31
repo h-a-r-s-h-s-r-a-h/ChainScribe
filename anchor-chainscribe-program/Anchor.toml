@@ -4,6 +4,7 @@ package_manager = "yarn"
 [features]
 resolution = true
 skip-lint = false
+seeds = true
 
 [programs.localnet]
 anchor_chainscribe_program = "FnAbLTmMMUA6XvadsrFm8pHtAYYNHEnKo4Q7tcG5vhiL"
