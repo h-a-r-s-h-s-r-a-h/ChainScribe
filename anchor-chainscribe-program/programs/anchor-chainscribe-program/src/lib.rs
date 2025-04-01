@@ -12,8 +12,6 @@ declare_id!("FnAbLTmMMUA6XvadsrFm8pHtAYYNHEnKo4Q7tcG5vhiL");
 
 #[program]
 pub mod anchor_chainscribe_program {
-    use state::blog;
-
     use super::*;
 
     pub fn create_topic(

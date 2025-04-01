@@ -121,11 +121,6 @@ describe("anchor-chainscribe-program", () => {
     }
   });
 
-  // ctx: Context<UpdateTopic>,
-  // _topic_id: String,
-  // topic_generator_name: String,
-  // topic_title: String,
-  // topic_description: String,
   it("Update topic!", async () => {
     try {
       const beforeTimestamp = Math.floor(Date.now() / 1000);
@@ -144,7 +139,9 @@ describe("anchor-chainscribe-program", () => {
         provider.wallet.publicKey.toString()
       );
       expect(account.topicId).to.equal(topic.topic_id);
-      expect(account.topicGeneratorName).to.equal(newTopic.topic_generator_name);
+      expect(account.topicGeneratorName).to.equal(
+        newTopic.topic_generator_name
+      );
       expect(account.topicTitle).to.equal(newTopic.topic_title);
       expect(account.topicDescription).to.equal(newTopic.topic_description);
       expect(account.noOfBlog).to.equal(1);
