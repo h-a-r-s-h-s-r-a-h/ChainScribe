@@ -1,4 +1,4 @@
-use crate::{constants::*, contexts::comment_context::DeleteComment, errors::*};
+use crate::{contexts::comment_context::DeleteComment, errors::*};
 use anchor_lang::prelude::*;
 
 pub fn delete_comment(

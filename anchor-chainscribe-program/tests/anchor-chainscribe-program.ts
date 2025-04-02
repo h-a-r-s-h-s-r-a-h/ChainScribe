@@ -306,4 +306,21 @@ describe("anchor-chainscribe-program", () => {
       throw error;
     }
   });
+
+  it("delete comment", async () => {
+    try {
+      await program.methods
+        .deleteComment(comment.comment_id, blog.blogId, topic.topic_id)
+        .accounts({})
+        .rpc();
+
+      const account = await program.account.commentAccountState.fetchNullable(
+        commentPda
+      );
+      expect(account).to.be.null;
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+      throw error;
+    }
+  });
 });

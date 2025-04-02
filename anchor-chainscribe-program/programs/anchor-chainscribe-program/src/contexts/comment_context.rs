@@ -64,7 +64,7 @@ pub struct UpdateComment<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(comment_id: String, blog_id: String,topic_id:String, comment_text: String)]
+#[instruction(comment_id: String, blog_id: String,topic_id:String)]
 pub struct DeleteComment<'info> {
     #[account(
         mut,
