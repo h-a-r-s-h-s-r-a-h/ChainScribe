@@ -9,3 +9,4 @@ pub const U32_SIZE: usize = 4;
 pub const BOOL_SIZE: usize = 1;
 pub const I64_SIZE: usize = 8;
 pub const MAX_BLOG_SIZE: usize = 500;
+pub const MAX_COMMENT_LENGTH: usize = 50;

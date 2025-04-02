@@ -23,9 +23,9 @@ pub struct AddComment<'info> {
         payer = commenter,
         space = CommentAccountState::INIT_SPACE 
             + comment_text.len() 
-            + MAX_ID_LENGTH 
-            + MAX_ID_LENGTH 
-            + MAX_ID_LENGTH,
+            + comment_id.len() 
+            + blog_id.len() 
+            + topic_id.len(),
     )]
     pub comment:Account<'info, CommentAccountState>,
 
