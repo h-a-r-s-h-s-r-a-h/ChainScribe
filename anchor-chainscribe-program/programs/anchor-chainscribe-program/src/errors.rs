@@ -10,7 +10,7 @@ pub enum TopicAccountError {
     TopicTitleTooLong,
     #[msg("Topic Description too long!")]
     TopicDescriptionTooLong,
-    #[msg("You have no right to update this topic!")]
+    #[msg("Only admin is allowed to update!")]
     AdminNotFound,
 }
 
@@ -24,4 +24,6 @@ pub enum BlogAccountError {
     BlogIdTooLong,
     #[msg("Blog too long!")]
     BlogTooLong,
+    #[msg("Only admin is allowed to update!")]
+    AdminNotFound,
 }

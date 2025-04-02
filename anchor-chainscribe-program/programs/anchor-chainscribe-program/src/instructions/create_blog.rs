@@ -23,6 +23,8 @@ pub fn create_blog(
         BlogAccountError::BlogGeneratorNameTooLong
     );
 
+    require!(blog.len() <= MAX_BLOG_SIZE, BlogAccountError::BlogTooLong);
+
     let blog_account = &mut ctx.accounts.blog_account;
     blog_account.blog_generator = ctx.accounts.blog_generator.key();
     blog_account.blog_generator_name = blog_generator_name;
@@ -39,5 +41,3 @@ pub fn create_blog(
 
     Ok(())
 }
-
-

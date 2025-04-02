@@ -3,7 +3,7 @@ use anchor_lang::prelude::*;
 
 #[derive(Accounts)]
 #[instruction(topic_id: String, blog_id: String)]
-pub struct CreateBlog<'info> {
+pub struct UpdateBlog<'info> {
     #[account(
         mut,
         seeds=["topic".as_bytes(), topic_id.as_bytes()],
