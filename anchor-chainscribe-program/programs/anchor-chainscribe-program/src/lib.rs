@@ -86,4 +86,14 @@ pub mod anchor_chainscribe_program {
     ) -> Result<()> {
         instructions::add_comment(ctx, comment_id, blog_id, topic_id, comment_text)
     }
+
+    pub fn update_comment(
+        ctx: Context<UpdateComment>,
+        comment_id: String,
+        blog_id: String,
+        topic_id: String,
+        comment_text: String,
+    ) -> Result<()> {
+        instructions::update_comment(ctx, comment_id, blog_id, topic_id, comment_text)
+    }
 }

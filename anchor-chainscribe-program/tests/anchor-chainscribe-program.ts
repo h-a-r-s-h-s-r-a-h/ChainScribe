@@ -33,6 +33,7 @@ describe("anchor-chainscribe-program", () => {
     comment_id: "1111",
     comment_text: "This is best blog",
   };
+  const newComment = "This is best blog i have ever seen!";
 
   const [commentPda] = anchor.web3.PublicKey.findProgramAddressSync(
     [
