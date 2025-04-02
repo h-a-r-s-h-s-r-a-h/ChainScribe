@@ -14,6 +14,10 @@ pub fn update_comment(
     );
 
     let comment = &mut ctx.accounts.comment;
+    require!(
+        comment.commenter == ctx.accounts.commenter.key(),
+        CommentAccountError::AdminNotFound
+    );
     comment.comment_text = comment_text;
     comment.last_updated_at = Clock::get()?.unix_timestamp;
 

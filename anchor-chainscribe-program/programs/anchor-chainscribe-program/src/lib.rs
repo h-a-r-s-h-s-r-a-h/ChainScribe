@@ -96,4 +96,13 @@ pub mod anchor_chainscribe_program {
     ) -> Result<()> {
         instructions::update_comment(ctx, comment_id, blog_id, topic_id, comment_text)
     }
+
+    pub fn delete_comment(
+        ctx: Context<DeleteComment>,
+        comment_id: String,
+        blog_id: String,
+        topic_id: String,
+    ) -> Result<()> {
+        instructions::delete_comment(ctx, comment_id, blog_id, topic_id)
+    }
 }

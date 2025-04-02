@@ -63,6 +63,30 @@ pub struct UpdateComment<'info> {
     pub system_program: Program<'info, System>,
 }
 
+#[derive(Accounts)]
+#[instruction(comment_id: String, blog_id: String,topic_id:String, comment_text: String)]
+pub struct DeleteComment<'info> {
+    #[account(
+        mut,
+        seeds = [
+            "comment".as_bytes(), 
+            comment_id.as_bytes(), 
+            blog_id.as_bytes(), 
+            commenter.key.as_ref()
+        ],
+        bump,
+        close = commenter
+    )]
+    pub comment:Account<'info, CommentAccountState>,
+
+    #[account(mut)]
+    pub commenter: Signer<'info>,
+
+    pub system_program: Program<'info, System>,
+
+}
+
+
 impl Space for CommentAccountState {
     const INIT_SPACE: usize = ANCHOR_DISCRIMINATOR
         + PUBKEY_SIZE

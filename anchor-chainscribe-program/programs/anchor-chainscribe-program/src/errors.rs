@@ -34,4 +34,6 @@ pub enum CommentAccountError {
     CommentIdTooLong,
     #[msg("Comment text too long!")]
     CommentTextTooLong,
+    #[msg("Only admin is allowed to update!")]
+    AdminNotFound,
 }
