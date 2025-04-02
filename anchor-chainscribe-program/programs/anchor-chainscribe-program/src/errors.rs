@@ -27,3 +27,11 @@ pub enum BlogAccountError {
     #[msg("Only admin is allowed to update!")]
     AdminNotFound,
 }
+
+#[error_code]
+pub enum CommentAccountError {
+    #[msg("Comment is too long!")]
+    CommentIdTooLong,
+    #[msg("Comment text too long!")]
+    CommentTextTooLong,
+}

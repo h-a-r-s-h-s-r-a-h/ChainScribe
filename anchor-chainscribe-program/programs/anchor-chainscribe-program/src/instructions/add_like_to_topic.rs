@@ -1,4 +1,4 @@
-use crate::{constants::*, contexts::*, errors::*};
+use crate::contexts::*;
 use anchor_lang::prelude::*;
 
 pub fn add_like_to_topic(ctx: Context<UpdateTopic>, _topic_id: String) -> Result<()> {
