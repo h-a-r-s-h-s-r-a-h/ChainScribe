@@ -29,6 +29,21 @@ describe("anchor-chainscribe-program", () => {
     generatorName: "Dev",
   };
 
+  const comment = {
+    comment_id: "1111",
+    comment_text: "This is best blog",
+  };
+
+  const [commentPda] = anchor.web3.PublicKey.findProgramAddressSync(
+    [
+      Buffer.from("comment"),
+      Buffer.from(comment.comment_id),
+      Buffer.from(blog.blogId),
+      provider.wallet.publicKey.toBuffer(),
+    ],
+    program.programId
+  );
+
   const [topicPda] = anchor.web3.PublicKey.findProgramAddressSync(
     [Buffer.from("topic"), Buffer.from(topic.topic_id)],
     program.programId
@@ -237,6 +252,31 @@ describe("anchor-chainscribe-program", () => {
       expect(account.isPublic).to.equal(true);
     } catch (error) {
       console.error("Error adding election:", error);
+      throw error;
+    }
+  });
+
+  it("add a comment", async () => {
+    try {
+      await program.methods
+        .addComment(
+          comment.comment_id,
+          blog.blogId,
+          topic.topic_id,
+          comment.comment_text
+        )
+        .accounts({})
+        .rpc();
+
+      const account = await program.account.commentAccountState.fetch(
+        commentPda
+      );
+      expect(account.commentId).to.equal(comment.comment_id);
+      expect(account.commentText).to.equal(comment.comment_text);
+      const blogAccount = await program.account.blogAccountState.fetch(blogPda);
+      expect(blogAccount.comments).to.equal(1);
+    } catch (error) {
+      console.log("Error adding comment: ", error);
       throw error;
     }
   });
