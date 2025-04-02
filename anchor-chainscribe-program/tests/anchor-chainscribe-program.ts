@@ -92,7 +92,7 @@ describe("anchor-chainscribe-program", () => {
         afterTimestamp
       );
     } catch (error) {
-      console.error("Error adding election:", error);
+      console.error("Error adding topic:", error);
       throw error;
     }
   });
@@ -132,7 +132,7 @@ describe("anchor-chainscribe-program", () => {
         afterTimestamp
       );
     } catch (error) {
-      console.error("Error adding election:", error);
+      console.error("Error adding blog:", error);
       throw error;
     }
   });
@@ -172,7 +172,7 @@ describe("anchor-chainscribe-program", () => {
         afterTimestamp
       );
     } catch (error) {
-      console.error("Error adding election:", error);
+      console.error("Error updating topic:", error);
       throw error;
     }
   });
@@ -212,7 +212,7 @@ describe("anchor-chainscribe-program", () => {
         afterTimestamp
       );
     } catch (error) {
-      console.error("Error adding election:", error);
+      console.error("Error updating blog:", error);
       throw error;
     }
   });
@@ -252,7 +252,7 @@ describe("anchor-chainscribe-program", () => {
       expect(account.isActive).to.equal(true);
       expect(account.isPublic).to.equal(true);
     } catch (error) {
-      console.error("Error adding election:", error);
+      console.error("Error liking topic:", error);
       throw error;
     }
   });
@@ -278,6 +278,31 @@ describe("anchor-chainscribe-program", () => {
       expect(blogAccount.comments).to.equal(1);
     } catch (error) {
       console.log("Error adding comment: ", error);
+      throw error;
+    }
+  });
+
+  it("update Comment", async () => {
+    try {
+      await program.methods
+        .updateComment(
+          comment.comment_id,
+          blog.blogId,
+          topic.topic_id,
+          newComment
+        )
+        .accounts({})
+        .rpc();
+
+      const account = await program.account.commentAccountState.fetch(
+        commentPda
+      );
+      expect(account.commentId).to.equal(comment.comment_id);
+      expect(account.commentText).to.equal(newComment);
+      const blogAccount = await program.account.blogAccountState.fetch(blogPda);
+      expect(blogAccount.comments).to.equal(1);
+    } catch (error) {
+      console.log("Error updating comment: ", error);
       throw error;
     }
   });
