@@ -204,7 +204,7 @@ describe("anchor-chainscribe-program", () => {
   it("add likes in blog", async () => {
     try {
       await program.methods
-        .addLike(topic.topic_id, blog.blogId)
+        .addLikeToBlog(topic.topic_id, blog.blogId)
         .accounts({})
         .rpc();
 
@@ -212,6 +212,31 @@ describe("anchor-chainscribe-program", () => {
       expect(account.likes).to.equal(1);
     } catch (error) {
       console.error("Error adding likes:", error);
+      throw error;
+    }
+  });
+
+  it("add likes to topic!", async () => {
+    try {
+      await program.methods.addLikeToTopic(topic.topic_id).accounts({}).rpc();
+
+      const account = await program.account.topicAccountState.fetch(topicPda);
+      expect(account.topicGeneratorId.toString()).to.equal(
+        provider.wallet.publicKey.toString()
+      );
+      expect(account.topicId).to.equal(topic.topic_id);
+      expect(account.topicGeneratorName).to.equal(
+        newTopic.topic_generator_name
+      );
+      expect(account.topicTitle).to.equal(newTopic.topic_title);
+      expect(account.topicDescription).to.equal(newTopic.topic_description);
+      expect(account.noOfBlog).to.equal(1);
+      expect(account.likes).to.equal(1);
+      expect(account.comments).to.equal(0);
+      expect(account.isActive).to.equal(true);
+      expect(account.isPublic).to.equal(true);
+    } catch (error) {
+      console.error("Error adding election:", error);
       throw error;
     }
   });

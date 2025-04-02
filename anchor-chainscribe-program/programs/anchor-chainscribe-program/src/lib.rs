@@ -65,7 +65,15 @@ pub mod anchor_chainscribe_program {
         instructions::update_blog(ctx, topic_id, blog_id, blog)
     }
 
-    pub fn add_like(ctx: Context<UpdateBlog>, topic_id: String, blog_id: String) -> Result<()> {
-        instructions::add_like(ctx, topic_id, blog_id)
+    pub fn add_like_to_blog(
+        ctx: Context<UpdateBlog>,
+        topic_id: String,
+        blog_id: String,
+    ) -> Result<()> {
+        instructions::add_likes_to_blog(ctx, topic_id, blog_id)
+    }
+
+    pub fn add_like_to_topic(ctx: Context<UpdateTopic>, topic_id: String) -> Result<()> {
+        instructions::add_like_to_topic(ctx, topic_id)
     }
 }
