@@ -3,8 +3,8 @@ use anchor_lang::prelude::*;
 
 pub fn update_blog(
     ctx: Context<UpdateBlog>,
-    topic_id: String,
-    blog_id: String,
+    _topic_id: String,
+    _blog_id: String,
     blog: String,
 ) -> Result<()> {
     require!(blog.len() <= MAX_BLOG_SIZE, BlogAccountError::BlogTooLong);
@@ -17,6 +17,7 @@ pub fn update_blog(
     );
 
     blog_account.blog = blog;
+    blog_account.last_updated_at = Clock::get()?.unix_timestamp;
 
     let topic = &mut ctx.accounts.topic;
     topic.last_updated_at = Clock::get()?.unix_timestamp;

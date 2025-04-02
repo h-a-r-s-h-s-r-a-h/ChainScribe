@@ -21,6 +21,7 @@ describe("anchor-chainscribe-program", () => {
     topic_title: "newBlockChain",
     topic_description: "new About Blockchain",
   };
+  const newBlog = "blockChain is best and rust is best!";
 
   const blog = {
     blogId: "01",
@@ -151,6 +152,50 @@ describe("anchor-chainscribe-program", () => {
 
       const afterTimestamp = Math.floor(Date.now() / 1000);
       expect(account.lastUpdatedAt.toNumber()).to.be.within(
+        beforeTimestamp - 1,
+        afterTimestamp
+      );
+    } catch (error) {
+      console.error("Error adding election:", error);
+      throw error;
+    }
+  });
+
+  // ctx: Context<UpdateBlog>,
+  //   _topic_id: String,
+  //   _blog_id: String,
+  //   blog: String,
+  it("Update Blog!", async () => {
+    try {
+      const beforeTimestamp = Math.floor(Date.now() / 1000);
+      await program.methods
+        .updateBlog(topic.topic_id, blog.blogId, blog.blog)
+        .accounts({})
+        .rpc();
+
+      const account = await program.account.blogAccountState.fetch(blogPda);
+
+      const topicAccount = await program.account.topicAccountState.fetch(
+        topicPda
+      );
+
+      expect(account.blogGenerator.toString()).to.equal(
+        provider.wallet.publicKey.toString()
+      );
+      expect(account.topicId).to.equal(topic.topic_id);
+      expect(account.blogGeneratorName).to.equal(blog.generatorName);
+      expect(account.blogId).to.equal(blog.blogId);
+      expect(account.blog).to.equal(blog.blog);
+      expect(topicAccount.noOfBlog).to.equal(1);
+      expect(account.likes).to.equal(0);
+      expect(account.comments).to.equal(0);
+
+      const afterTimestamp = Math.floor(Date.now() / 1000);
+      expect(account.lastUpdatedAt.toNumber()).to.be.within(
+        beforeTimestamp - 1,
+        afterTimestamp
+      );
+      expect(topicAccount.lastUpdatedAt.toNumber()).to.be.within(
         beforeTimestamp - 1,
         afterTimestamp
       );

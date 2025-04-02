@@ -56,5 +56,12 @@ pub mod anchor_chainscribe_program {
         )
     }
 
-    
+    pub fn update_blog(
+        ctx: Context<UpdateBlog>,
+        topic_id: String,
+        blog_id: String,
+        blog: String,
+    ) -> Result<()> {
+        instructions::update_blog(ctx, topic_id, blog_id, blog)
+    }
 }
