@@ -13,7 +13,7 @@ pub struct UpdateBlog<'info> {
 
     #[account(
         mut,
-        seeds=["blog".as_bytes(), topic_id.as_bytes(), blog_id.as_bytes(),],
+        seeds=["blog".as_bytes(), topic_id.as_bytes(), blog_id.as_bytes()],
         bump,
     )]
     pub blog_account: Account<'info, BlogAccountState>,

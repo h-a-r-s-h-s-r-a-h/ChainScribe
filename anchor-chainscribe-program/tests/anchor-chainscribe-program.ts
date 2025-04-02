@@ -161,10 +161,6 @@ describe("anchor-chainscribe-program", () => {
     }
   });
 
-  // ctx: Context<UpdateBlog>,
-  //   _topic_id: String,
-  //   _blog_id: String,
-  //   blog: String,
   it("Update Blog!", async () => {
     try {
       const beforeTimestamp = Math.floor(Date.now() / 1000);
@@ -201,6 +197,21 @@ describe("anchor-chainscribe-program", () => {
       );
     } catch (error) {
       console.error("Error adding election:", error);
+      throw error;
+    }
+  });
+
+  it("add likes in blog", async () => {
+    try {
+      await program.methods
+        .addLike(topic.topic_id, blog.blogId)
+        .accounts({})
+        .rpc();
+
+      const account = await program.account.blogAccountState.fetch(blogPda);
+      expect(account.likes).to.equal(1);
+    } catch (error) {
+      console.error("Error adding likes:", error);
       throw error;
     }
   });
